@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 830" width="1120" height="830" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="13">
+  <title>Schemat bazy danych E-Dziennika</title>
+  <desc>Osiem tabel: users, school_classes, subjects, class_subject_teacher, parent_student, grades, grade_histories, notes oraz klucze obce między nimi.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#c8553d"/>
+    </marker>
+    <style>
+      .h { fill: #1d4e5f; }
+      .b { fill: #fff; stroke: #1d4e5f; stroke-width: 1.2; }
+      .t { fill: #fff; font-weight: 700; font-size: 14px; }
+      .r { fill: #1c2536; }
+      .pk { fill: #1c2536; font-weight: 700; }
+      .fk { fill: #1d6f86; font-weight: 600; }
+      .e { fill: none; stroke: #c8553d; stroke-width: 1.5; marker-end: url(#a); }
+      .l { fill: #8d3a27; font-size: 11.5px; font-weight: 600; paint-order: stroke; stroke: #fff; stroke-width: 4px; }
+    </style>
+  </defs>
+
+  <rect width="1120" height="830" fill="#fbfaf6"/>
+
+  <!-- Klucze obce -->
+  <path class="e" d="M420 204H360V84H302"/>
+  <text class="l" x="306" y="77">class_id</text>
+  <path class="e" d="M300 144H395V92H418"/>
+  <text class="l" x="306" y="138">wychowawca</text>
+  <path class="e" d="M300 324H340V214H418"/>
+  <text class="l" x="306" y="318">parent_id, student_id</text>
+  <path class="e" d="M300 510H385V270H450V220"/>
+  <text class="l" x="306" y="490">student_id,</text>
+  <text class="l" x="306" y="504">teacher_id</text>
+  <path class="e" d="M555 330V220"/>
+  <text class="l" x="563" y="282">student_id, teacher_id</text>
+  <path class="e" d="M690 400H770V100H818"/>
+  <text class="l" x="696" y="394">subject_id</text>
+  <path class="e" d="M555 620V550"/>
+  <text class="l" x="563" y="590">grade_id</text>
+  <path class="e" d="M690 720H735V190H692"/>
+  <text class="l" x="696" y="714">changed_by</text>
+  <path class="e" d="M820 310H750V160H692"/>
+  <text class="l" x="755" y="304">teacher_id</text>
+  <path class="e" d="M955 220V120"/>
+  <text class="l" x="963" y="172">subject_id</text>
+  <path class="e" d="M1090 270H1105V16H165V38"/>
+  <text class="l" x="600" y="12">class_id</text>
+
+  <!-- school_classes -->
+  <rect class="b" x="30" y="40" width="270" height="118" rx="6"/>
+  <rect class="h" x="30" y="40" width="270" height="30" rx="6"/>
+  <text class="t" x="42" y="60">school_classes</text>
+  <text class="pk" x="42" y="89">id (PK)</text>
+  <text class="r" x="42" y="109">name</text>
+  <text class="r" x="42" y="129">school_year</text>
+  <text class="fk" x="42" y="149">homeroom_teacher_id (FK)</text>
+
+  <!-- users -->
+  <rect class="b" x="420" y="40" width="270" height="178" rx="6"/>
+  <rect class="h" x="420" y="40" width="270" height="30" rx="6"/>
+  <text class="t" x="432" y="60">users</text>
+  <text class="pk" x="432" y="89">id (PK)</text>
+  <text class="r" x="432" y="109">first_name</text>
+  <text class="r" x="432" y="129">last_name</text>
+  <text class="r" x="432" y="149">email (UNIQUE)</text>
+  <text class="r" x="432" y="169">password</text>
+  <text class="r" x="432" y="189">role (ENUM)</text>
+  <text class="fk" x="432" y="209">class_id (FK, NULL)</text>
+
+  <!-- subjects -->
+  <rect class="b" x="820" y="40" width="270" height="78" rx="6"/>
+  <rect class="h" x="820" y="40" width="270" height="30" rx="6"/>
+  <text class="t" x="832" y="60">subjects</text>
+  <text class="pk" x="832" y="89">id (PK)</text>
+  <text class="r" x="832" y="109">name (UNIQUE)</text>
+
+  <!-- parent_student -->
+  <rect class="b" x="30" y="250" width="270" height="98" rx="6"/>
+  <rect class="h" x="30" y="250" width="270" height="30" rx="6"/>
+  <text class="t" x="42" y="270">parent_student</text>
+  <text class="pk" x="42" y="299">id (PK)</text>
+  <text class="fk" x="42" y="319">parent_id (FK)</text>
+  <text class="fk" x="42" y="339">student_id (FK)</text>
+
+  <!-- class_subject_teacher -->
+  <rect class="b" x="820" y="220" width="270" height="118" rx="6"/>
+  <rect class="h" x="820" y="220" width="270" height="30" rx="6"/>
+  <text class="t" x="832" y="240">class_subject_teacher</text>
+  <text class="pk" x="832" y="269">id (PK)</text>
+  <text class="fk" x="832" y="289">class_id (FK)</text>
+  <text class="fk" x="832" y="309">subject_id (FK)</text>
+  <text class="fk" x="832" y="329">teacher_id (FK)</text>
+
+  <!-- grades -->
+  <rect class="b" x="420" y="330" width="270" height="218" rx="6"/>
+  <rect class="h" x="420" y="330" width="270" height="30" rx="6"/>
+  <text class="t" x="432" y="350">grades</text>
+  <text class="pk" x="432" y="379">id (PK)</text>
+  <text class="fk" x="432" y="399">student_id (FK)</text>
+  <text class="fk" x="432" y="419">subject_id (FK)</text>
+  <text class="fk" x="432" y="439">teacher_id (FK)</text>
+  <text class="r" x="432" y="459">value (1–6)</text>
+  <text class="r" x="432" y="479">weight (1–5)</text>
+  <text class="r" x="432" y="499">category</text>
+  <text class="r" x="432" y="519">description (NULL)</text>
+  <text class="r" x="432" y="539">deleted_at (usunięcie miękkie)</text>
+
+  <!-- notes -->
+  <rect class="b" x="30" y="440" width="270" height="138" rx="6"/>
+  <rect class="h" x="30" y="440" width="270" height="30" rx="6"/>
+  <text class="t" x="42" y="460">notes</text>
+  <text class="pk" x="42" y="489">id (PK)</text>
+  <text class="fk" x="42" y="509">student_id (FK)</text>
+  <text class="fk" x="42" y="529">teacher_id (FK)</text>
+  <text class="r" x="42" y="549">type (ENUM)</text>
+  <text class="r" x="42" y="569">content</text>
+
+  <!-- grade_histories -->
+  <rect class="b" x="420" y="620" width="270" height="178" rx="6"/>
+  <rect class="h" x="420" y="620" width="270" height="30" rx="6"/>
+  <text class="t" x="432" y="640">grade_histories</text>
+  <text class="pk" x="432" y="669">id (PK)</text>
+  <text class="fk" x="432" y="689">grade_id (FK)</text>
+  <text class="r" x="432" y="709">action (ENUM)</text>
+  <text class="r" x="432" y="729">old_/new_value, old_/new_weight</text>
+  <text class="r" x="432" y="749">old_/new_category, old_/new_description</text>
+  <text class="fk" x="432" y="769">changed_by (FK)</text>
+  <text class="r" x="432" y="789">created_at</text>
+
+  <text x="820" y="780" fill="#5a6478">Strzałka prowadzi od klucza obcego</text>
+  <text x="820" y="798" fill="#5a6478">do tabeli, na którą wskazuje.</text>
+</svg>
