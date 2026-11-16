@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SchoolClass;
+use App\Models\Subject;
 use App\Models\User;
 use App\Services\GradeAverageCalculator;
 use Illuminate\Http\Request;
@@ -17,11 +18,13 @@ class HomeroomController extends Controller
 
         $students = $class->students()->with('grades')->get();
 
-        // Kolumny tabeli: przedmioty, z których uczniowie klasy mają oceny.
-        $subjects = $class->assignments()->with('subject')->get()
-            ->pluck('subject')
-            ->sortBy('name')
-            ->values();
+        // Kolumny tabeli: przedmioty z przydziałów klasy oraz te, z których uczniowie mają oceny
+        // (np. ocena wpisana przez administratora z przedmiotu bez przydziału).
+        $subjectIds = $class->assignments()->pluck('subject_id')
+            ->merge($students->flatMap->grades->pluck('subject_id'))
+            ->unique();
+
+        $subjects = Subject::whereIn('id', $subjectIds)->orderBy('name')->get();
 
         return view('teacher.homeroom.show', [
             'class' => $class,

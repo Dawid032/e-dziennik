@@ -25,4 +25,11 @@ class SubjectRequest extends FormRequest
             ],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.regex' => 'Nazwa przedmiotu musi zaczynać się od litery, np. Sieci komputerowe.',
+        ];
+    }
 }

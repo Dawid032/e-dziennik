@@ -50,7 +50,24 @@ class AuthTest extends TestCase
             $this->post('/login', ['email' => $user->email, 'password' => 'zlehaslo1']);
         }
 
-        $this->post('/login', ['email' => $user->email, 'password' => 'zlehaslo1'])->assertStatus(429);
+        // Po 5 nieudanych próbach blokada działa nawet przy poprawnym haśle.
+        $this->post('/login', ['email' => $user->email, 'password' => 'haslo123'])->assertSessionHasErrors('email');
+        $this->assertGuest();
+        $this->assertStringContainsString('Zbyt wiele prób logowania', session('errors')->first('email'));
+
+        // Inne konto nie jest blokowane.
+        $other = $this->makeUser('teacher');
+        $this->post('/login', ['email' => $other->email, 'password' => 'haslo123'])->assertRedirect('/teacher/dashboard');
+    }
+
+    public function test_successful_logins_do_not_use_up_the_limit(): void
+    {
+        $user = $this->makeUser('student');
+
+        for ($i = 0; $i < 8; $i++) {
+            $this->post('/login', ['email' => $user->email, 'password' => 'haslo123'])->assertRedirect('/student/dashboard');
+            $this->post('/logout');
+        }
     }
 
     public function test_there_is_no_public_registration(): void

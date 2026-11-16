@@ -76,7 +76,7 @@ Dalej postępuj jak w krokach 2–4 powyżej.
 | `could not find driver` | Wyłączone rozszerzenie `pdo_mysql`. Włącz je w `php.ini`. |
 | Komunikat o zbyt niskiej wersji PHP | Aplikacja wymaga PHP 8.2 lub nowszego. |
 | Podstrony zwracają 404 z Apache | Sprawdź, czy istnieje plik `public/.htaccess` i czy adres zawiera nazwę folderu. |
-| Strona „Zbyt wiele prób" (429) | Zabezpieczenie logowania: 5 prób na minutę. Odczekaj minutę. |
+| Komunikat „Zbyt wiele prób logowania" | Zabezpieczenie: po 5 błędnych hasłach do tego samego konta logowanie blokuje się na minutę. Udane logowania się nie liczą. |
 | Błąd zapisu w `storage` (macOS, Linux) | Wykonaj polecenie `chmod` z sekcji powyżej. |
 
 ## Dokumentacja

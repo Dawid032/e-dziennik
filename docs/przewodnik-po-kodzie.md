@@ -243,4 +243,4 @@ Nie używaj `php artisan config:cache` ani `route:cache`, bo zapisują ścieżki
 | `405 Method Not Allowed` | Czy formularz PUT lub DELETE ma `@method('PUT')` albo `@method('DELETE')`. |
 | Pole znika z bazy po zapisie | Czy jest w `rules()` w Form Requeście, bo zapisywane są tylko pola walidowane. |
 | Zmiana nie jest widoczna | `php artisan optimize:clear` i odświeżenie strony. |
-| Strona 429 przy logowaniu | Limit 5 prób na minutę. Odczekaj minutę albo wykonaj `php artisan cache:clear`. |
+| „Zbyt wiele prób logowania” | 5 błędnych haseł do jednego konta w ciągu minuty. Odczekaj minutę albo wykonaj `php artisan cache:clear`. Limit jest w `LoginController@store`. |

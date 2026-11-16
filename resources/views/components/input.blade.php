@@ -3,7 +3,7 @@
 @php($id = 'f-'.$name)
 
 <div @class(['field', 'is-invalid' => $errors->has($name)])>
-    <label for="{{ $id }}">{{ $label }}@if ($attributes->has('required')) <span class="req" aria-hidden="true">*</span>@endif</label>
+    <label for="{{ $id }}">{{ $label }}@if ($attributes->get('required')) <span class="req" aria-hidden="true">*</span>@endif</label>
     <input id="{{ $id }}" name="{{ $name }}" type="{{ $type }}" value="{{ $type === 'password' ? '' : old($name, $value) }}" {{ $attributes }}>
     @if ($help)
         <small>{{ $help }}</small>

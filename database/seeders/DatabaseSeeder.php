@@ -309,11 +309,19 @@ class DatabaseSeeder extends Seeder
 
             Note::create([
                 'student_id' => $student->id,
-                'teacher_id' => $assignments->firstWhere('class_id', $student->class_id)->teacher_id,
+                // Autorem jest kolejno jeden z nauczycieli uczących w klasie ucznia.
+                'teacher_id' => $this->teacherOfClass($assignments, $student->class_id, $i),
                 'type' => $isPraise ? Note::TYPE_PRAISE : Note::TYPE_WARNING,
                 'content' => $contents[$i % count($contents)],
             ]);
         }
+    }
+
+    private function teacherOfClass(Collection $assignments, int $classId, int $index): int
+    {
+        $teacherIds = $assignments->where('class_id', $classId)->pluck('teacher_id')->unique()->values();
+
+        return $teacherIds[$index % $teacherIds->count()];
     }
 
     private function person(string $role, ?int $classId = null): User

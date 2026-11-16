@@ -75,7 +75,6 @@ return [
         'first_name' => ['regex' => 'Imię musi zaczynać się wielką literą i zawierać tylko litery.'],
         'last_name' => ['regex' => 'Nazwisko musi zaczynać się wielką literą i zawierać tylko litery.'],
         'password' => ['regex' => 'Hasło musi mieć co najmniej 8 znaków, w tym literę i cyfrę.'],
-        'name' => ['regex' => 'Nieprawidłowy format nazwy, przykłady: 1A, 3Ti lub Sieci komputerowe.'],
         'school_year' => ['regex' => 'Rok szkolny podaj w formacie 2026/2027.'],
     ],
 

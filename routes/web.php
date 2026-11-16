@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 // Logowanie. Konta zakłada administrator, dlatego nie ma trasy /register.
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:5,1')->name('login.store');
+    // Limit nieudanych prób logowania jest w LoginController@store.
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 });
 
 Route::middleware('auth')->group(function () {

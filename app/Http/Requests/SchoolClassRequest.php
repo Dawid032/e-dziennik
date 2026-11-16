@@ -47,6 +47,7 @@ class SchoolClassRequest extends FormRequest
     {
         return [
             'name.unique' => 'Taka klasa już istnieje w tym roku szkolnym.',
+            'name.regex' => 'Nazwa klasy to cyfra 1–8 i wielka litera, np. 1A lub 3Ti.',
         ];
     }
 }

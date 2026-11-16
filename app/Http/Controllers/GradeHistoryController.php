@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grade;
 use App\Models\GradeHistory;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -24,8 +25,15 @@ class GradeHistoryController extends Controller
             ->paginate(config('dziennik.per_page'))
             ->withQueryString();
 
+        // Nauczyciel widzi w filtrze te przedmioty, które występują w jego historii,
+        // czyli własne przydziały oraz wszystkie przedmioty klasy wychowawczej.
         $subjects = Subject::query()
-            ->when($user->isTeacher(), fn ($query) => $query->whereIn('id', $user->teachingAssignments()->pluck('subject_id')))
+            ->when($user->isTeacher(), fn ($query) => $query->whereIn(
+                'id',
+                Grade::withTrashed()
+                    ->whereIn('id', GradeHistory::visibleToTeacher($user)->select('grade_id'))
+                    ->select('subject_id')
+            ))
             ->orderBy('name')
             ->pluck('name', 'id');
 

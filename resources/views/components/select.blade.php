@@ -7,7 +7,7 @@
 @endphp
 
 <div @class(['field', 'is-invalid' => $errors->has($name)])>
-    <label for="{{ $id }}">{{ $label }}@if ($attributes->has('required')) <span class="req" aria-hidden="true">*</span>@endif</label>
+    <label for="{{ $id }}">{{ $label }}@if ($attributes->get('required')) <span class="req" aria-hidden="true">*</span>@endif</label>
     <select id="{{ $id }}" name="{{ $name }}" {{ $attributes }}>
         @if ($placeholder !== null)
             <option value="">{{ $placeholder }}</option>
