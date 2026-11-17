@@ -23,7 +23,8 @@
   <path class="e" d="M420 204H360V84H302"/>
   <text class="l" x="306" y="77">class_id</text>
   <path class="e" d="M300 144H395V92H418"/>
-  <text class="l" x="306" y="138">wychowawca</text>
+  <text class="l" x="306" y="124">homeroom_</text>
+  <text class="l" x="306" y="138">teacher_id</text>
   <path class="e" d="M300 324H340V214H418"/>
   <text class="l" x="306" y="318">parent_id, student_id</text>
   <path class="e" d="M300 510H385V270H450V220"/>
@@ -101,7 +102,7 @@
   <text class="r" x="432" y="479">weight (1–5)</text>
   <text class="r" x="432" y="499">category</text>
   <text class="r" x="432" y="519">description (NULL)</text>
-  <text class="r" x="432" y="539">deleted_at (usunięcie miękkie)</text>
+  <text class="r" x="432" y="539">deleted_at (usuwanie miękkie)</text>
 
   <!-- notes -->
   <rect class="b" x="30" y="440" width="270" height="138" rx="6"/>
